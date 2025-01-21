@@ -1,7 +1,3 @@
-body {
-    font-family: 'Calculator', sans-serif;
-}
-
 .container {
     display: flex;
     flex-direction: column;
@@ -9,29 +5,20 @@ body {
     align-items: center;
 }
 
-.calculadora {
+.calculator {
     background-color: rgb(215 218 215);
-    border: solid 2px black;
+    border: solid 2px #212529;
     border-radius: 10px;
     padding: 20px;
     margin: 50px;
-    width: 40%;
+    width: 45%;
 }
 
-.calculadora input {
-    border: solid 2px black;
+.calculator input {
+    border: solid 2px #212529;
     border-radius: 10px;
     font-size: 30px;
     font-weight: bold;
     background-color: rgb(131 148 122);
 }
 
-.calculadora button {
-    font-size: 20px;
-    font-weight: bold;
-}
-
-.ultimos-resultados {
-    text-align: center;
-    font-size: 30px;
-}
