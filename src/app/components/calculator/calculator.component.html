@@ -3,7 +3,15 @@
     <section class="calculator">
         <div class="row g-2">
  
-            <input type="text" class="col-12 mb-3" [value]="display" readonly>
+            <app-display-input inputClass="col-12 mb-3" [displayValue]="display"></app-display-input>
+
+            <div class="col-12 col-md-8">
+                <app-action-button buttonClass="btn btn-dark" 
+                    buttonContent= "Copiar"
+                    (buttonClicked)="copyToClipboard()"
+                    (click)="showComponent()">
+                </app-action-button>
+            </div> 
 
             @for (n of numbers; track $index) {
                 <div class="col-12 col-md-4">
@@ -50,3 +58,8 @@
     </section>
 
 </main>
+
+@if (showAlert) {
+    <app-alert alertClass="alert alert-success" alertContent="Conteúdo Copiado!"></app-alert>
+}
+

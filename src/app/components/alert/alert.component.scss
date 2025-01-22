@@ -1,0 +1,15 @@
+div[role="alert"] {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 15px;
+    font-size: 20px;
+}
+
+div button {
+    font-size: 15px;
+}

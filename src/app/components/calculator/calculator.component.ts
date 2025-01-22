@@ -1,17 +1,21 @@
 import { Component } from '@angular/core';
 import { ActionButtonComponent } from "../action-button/action-button.component";
+import { DisplayInputComponent } from "../display-input/display-input.component";
+import { AlertComponent } from "../alert/alert.component";
 
 @Component({
   selector: 'app-calculator',
-  imports: [ActionButtonComponent],
+  imports: [ActionButtonComponent, DisplayInputComponent, AlertComponent],
   templateUrl: './calculator.component.html',
   styleUrl: './calculator.component.scss'
 })
 export class CalculatorComponent {
 
   numbers: Array<number> = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-  operators: Array<string> = ["+", "-", "*", "/", "."]
+  operators: Array<string> = [".", "-", "+", "*", "/", "%"]
   display: string = "";
+
+  showAlert: boolean = false;
 
   setButtonValue(value: number | string) {
     this.display += value;
@@ -32,7 +36,7 @@ export class CalculatorComponent {
   printResultDisplay() {
     try {
       let result = eval(this.display);
-      if (result) {
+      if (result !== undefined) {
         this.display = result.toString();
       }
       else {
@@ -42,6 +46,18 @@ export class CalculatorComponent {
       console.log(error);
       this.display = "Erro...";
     }
+  }
+
+  copyToClipboard() {
+    navigator.clipboard.writeText(this.display);
+  }
+
+  showComponent() {
+    this.showAlert = true;
+
+    setTimeout(() => {
+      this.showAlert = false;
+    }, 1500);
   }
   
 }

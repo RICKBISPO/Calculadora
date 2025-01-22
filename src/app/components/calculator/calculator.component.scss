@@ -6,19 +6,12 @@
 }
 
 .calculator {
+    font-family: 'Calculator', sans-serif;
     background-color: rgb(215 218 215);
     border: solid 2px #212529;
     border-radius: 10px;
     padding: 20px;
     margin: 50px;
     width: 45%;
-}
-
-.calculator input {
-    border: solid 2px #212529;
-    border-radius: 10px;
-    font-size: 30px;
-    font-weight: bold;
-    background-color: rgb(131 148 122);
 }
 
