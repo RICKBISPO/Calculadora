@@ -19,7 +19,7 @@ export class ActionButtonComponent implements OnInit {
   }
 
   onButtonClick(value?: string | number) {
-    if (value) {
+    if (value || value === 0) {
       this.buttonClicked.emit(value);
     } else {
       this.buttonClicked.emit();

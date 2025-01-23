@@ -44,10 +44,10 @@
         </app-action-button>
     </ng-container>
 
-    <ng-container alert>
-        @if (showAlert) {
+    @if (showAlert) {
+        <ng-container alert>
             <app-alert alertClass="alert alert-success" alertContent="Conteúdo Copiado!"></app-alert>
-        }
-    </ng-container>
+        </ng-container>
+    }
 
 </app-calculator-container>
