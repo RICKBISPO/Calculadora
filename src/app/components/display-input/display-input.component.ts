@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-display-input',
@@ -8,7 +8,6 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 })
 export class DisplayInputComponent {
 
-  @Input() inputClass: string = "";
   @Input() displayValue: string = "";
 
 }

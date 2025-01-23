@@ -1,65 +1,53 @@
-<main class="container">
+<app-calculator-container>
 
-    <section class="calculator">
-        <div class="row g-2">
- 
-            <app-display-input inputClass="col-12 mb-3" [displayValue]="display"></app-display-input>
+    <ng-container display>
+        <app-display-input [displayValue]="display"></app-display-input>
+    </ng-container>
 
-            <div class="col-12 col-md-8">
-                <app-action-button buttonClass="btn btn-dark" 
-                    buttonContent= "Copiar"
-                    (buttonClicked)="copyToClipboard()"
-                    (click)="showComponent()">
-                </app-action-button>
-            </div> 
+    <ng-container buttonCopy>
+        <app-action-button buttonColor="dark" 
+            buttonContent="Copiar"
+            (buttonClicked)="copyToClipboard()"
+            (click)="showComponent()">
+        </app-action-button>
+    </ng-container>
 
-            @for (n of numbers; track $index) {
-                <div class="col-12 col-md-4">
-                    <app-action-button buttonClass="btn btn-light"
-                        buttonContent= {{n}}
-                        buttonValue= {{n}}
-                        (buttonClicked)="setButtonValue($event)">
-                    </app-action-button>
-                </div>
-            }
-
-            @for (op of operators; track $index) {
-                <div class="col-12 col-md-4">
-                    <app-action-button buttonClass="btn btn-secondary" 
-                        buttonContent= {{op}}
-                        buttonValue= {{op}}
-                        (buttonClicked)="setButtonValue($event)">
-                    </app-action-button>
-                </div> 
-            }
-
-            <div class="col-12 col-md-6">
-                <app-action-button buttonClass="btn btn-warning" 
-                    buttonContent="Deletar"
-                    (buttonClicked)="removeItemDisplay()">
-                </app-action-button>
-            </div>
-            
-            <div class="col-12 col-md-6">
-                <app-action-button buttonClass="btn btn-danger" 
-                    buttonContent="Limpar"
-                    (buttonClicked)="clearDisplay()">
-                </app-action-button>
-            </div>
-
-            <div class="col-12">
-                <app-action-button buttonClass="btn btn-primary" 
-                    buttonContent="Resultado"
-                    (buttonClicked)="printResultDisplay()">
-                </app-action-button>
-            </div>
-            
+    @for (item of numbersAndOperators; track $index) {
+        <div class="col-12 col-md-4" buttonNumbersAndOperators>
+            <app-action-button 
+                [buttonColor]="typeof item === 'string' ? 'secondary' : 'light'" 
+                [buttonContent]="item" 
+                [buttonValue]="item"
+                (buttonClicked)="setButtonValue($event)">
+            </app-action-button>
         </div>
-    </section>
+    }
 
-</main>
+    <ng-container buttonDelete>
+        <app-action-button buttonColor="warning" 
+            buttonContent="Deletar"
+            (buttonClicked)="removeItemDisplay()">
+        </app-action-button>
+    </ng-container>
 
-@if (showAlert) {
-    <app-alert alertClass="alert alert-success" alertContent="Conteúdo Copiado!"></app-alert>
-}
+    <ng-container buttonClear>
+        <app-action-button buttonColor="danger" 
+            buttonContent="Limpar"
+            (buttonClicked)="clearDisplay()">
+        </app-action-button>
+    </ng-container>
 
+    <ng-container buttonResult>
+        <app-action-button buttonColor="primary" 
+            buttonContent="Resultado"
+            (buttonClicked)="printResultDisplay()">
+        </app-action-button>
+    </ng-container>
+
+    <ng-container alert>
+        @if (showAlert) {
+            <app-alert alertClass="alert alert-success" alertContent="Conteúdo Copiado!"></app-alert>
+        }
+    </ng-container>
+
+</app-calculator-container>

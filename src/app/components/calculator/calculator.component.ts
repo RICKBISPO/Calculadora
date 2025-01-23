@@ -1,21 +1,31 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActionButtonComponent } from "../action-button/action-button.component";
 import { DisplayInputComponent } from "../display-input/display-input.component";
 import { AlertComponent } from "../alert/alert.component";
+import { CalculatorContainerComponent } from "../calculator-container/calculator-container.component";
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-calculator',
-  imports: [ActionButtonComponent, DisplayInputComponent, AlertComponent],
+  imports: [ActionButtonComponent, 
+    DisplayInputComponent, 
+    AlertComponent, 
+    CalculatorContainerComponent,
+    CommonModule],
   templateUrl: './calculator.component.html',
   styleUrl: './calculator.component.scss'
 })
-export class CalculatorComponent {
+export class CalculatorComponent implements OnInit {
 
-  numbers: Array<number> = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-  operators: Array<string> = [".", "-", "+", "*", "/", "%"]
+  numbersAndOperators: Array<number | string> = [];
   display: string = "";
 
-  showAlert: boolean = false;
+  @ViewChild('showAlert') showAlert: boolean = false;
+
+  ngOnInit(): void {
+    this.numbersAndOperators = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 
+      ".", "-", "+", "*", "/", "%"];
+  }
 
   setButtonValue(value: number | string) {
     this.display += value;
@@ -36,7 +46,7 @@ export class CalculatorComponent {
   printResultDisplay() {
     try {
       let result = eval(this.display);
-      if (result !== undefined) {
+      if (result !== undefined && !(isNaN(result))) {
         this.display = result.toString();
       }
       else {
