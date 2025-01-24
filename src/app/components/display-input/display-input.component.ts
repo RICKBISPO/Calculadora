@@ -8,6 +8,13 @@ import { Component, Input } from '@angular/core';
 })
 export class DisplayInputComponent {
 
-  @Input() displayValue: string = "";
+  displayValue: string = "";
 
+  getDisplayValue() {
+    return this.displayValue;
+  }
+
+  setDisplayValue(value: string) {
+    this.displayValue = value;
+  }
 }

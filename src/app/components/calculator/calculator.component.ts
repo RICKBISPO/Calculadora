@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { ActionButtonComponent } from "../action-button/action-button.component";
 import { DisplayInputComponent } from "../display-input/display-input.component";
 import { AlertComponent } from "../alert/alert.component";
@@ -18,9 +18,9 @@ import { CommonModule } from '@angular/common';
 export class CalculatorComponent implements OnInit {
 
   numbersAndOperators: Array<number | string> = [];
-  display: string = "";
+  @ViewChild('display') display!: DisplayInputComponent;
 
-  @ViewChild('showAlert') showAlert: boolean = false;
+  showAlert: boolean = false;
 
   ngOnInit(): void {
     this.numbersAndOperators = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 
@@ -28,38 +28,41 @@ export class CalculatorComponent implements OnInit {
   }
 
   setButtonValue(value: number | string) {
-    this.display += value;
+    const displayValue = this.display.getDisplayValue() + value;
+    this.display.setDisplayValue(displayValue);
   }
 
   clearDisplay() {
-    this.display = "";
+    const displayValue = "";
+    this.display.setDisplayValue(displayValue);
   }
 
   removeItemDisplay() {
-    if (this.display === "Erro...") {
-      this.display = "";
+    const displayValue = this.display.getDisplayValue();
+    if (displayValue === "Erro...") {
+      this.display.setDisplayValue("");
     } else {
-      this.display =  this.display.split("").slice(0, -1).join("");
+      this.display.setDisplayValue(displayValue.split("").slice(0, -1).join(""));
     }
   }
 
   printResultDisplay() {
     try {
-      let result = eval(this.display);
+      let result = eval(this.display.getDisplayValue());
       if (result !== undefined && !(isNaN(result))) {
-        this.display = result.toString();
+        this.display.setDisplayValue(result.toString());
       }
       else {
-        this.display = "Erro...";
+        this.display.setDisplayValue("Erro...");
       }
     } catch (error) {
       console.log(error);
-      this.display = "Erro...";
+      this.display.setDisplayValue("Erro...");
     }
   }
 
   copyToClipboard() {
-    navigator.clipboard.writeText(this.display);
+    navigator.clipboard.writeText(this.display.getDisplayValue());
   }
 
   showComponent() {
